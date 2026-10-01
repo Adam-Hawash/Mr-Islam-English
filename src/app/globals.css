@@ -6,7 +6,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-cairo);
+  --font-sans: var(--font-jakarta);
+  --font-display: "Space Grotesk", var(--font-jakarta), sans-serif;
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -28,193 +29,241 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* لوحة "البريق الليلي" — بنفسجي × كهرماني على منتصف الليل */
-  --color-night-900: #0a0812;
-  --color-night-800: #100c1c;
-  --color-night-700: #171226;
-  --color-night-600: #1e1733;
-  --color-night-500: #271e42;
-  --color-violet-100: #ede9fe;
-  --color-violet-200: #ddd6fe;
-  --color-violet-300: #c4b5fd;
-  --color-violet-400: #a78bfa;
-  --color-violet-500: #8b5cf6;
-  --color-violet-600: #7c3aed;
-  --color-fuchsia-400: #e879f9;
-  --color-fuchsia-500: #d946ef;
-  --color-amber-300: #fcd34d;
-  --color-amber-400: #fbbf24;
-  --color-amber-500: #f59e0b;
+  /* Mr. Islam brand — deep purple × warm amber on a clean white family base */
+  --color-brand-50: #F5F3FF;
+  --color-brand-100: #EDE9FE;
+  --color-brand-200: #DDD6FE;
+  --color-brand-500: #8B5CF6;
+  --color-brand-600: #7C3AED;
+  --color-brand-700: #6D28D9;
+  --color-ink-900: #12101F;
+  --color-ink-800: #1E1B2E;
+  --color-ink-700: #2A2640;
+  --color-gold-300: #FCD34D;
+  --color-gold-400: #FBBF24;
+  --color-gold-500: #F59E0B;
+  --color-gold-600: #D97706;
 }
 
+/* ============================================================
+   UNIFIED PLATFORM DESIGN SYSTEM — light, clean, editorial
+   White canvas #FFFFFF · ink #1A1A1A · cream #F5EFE0 · border #D0D0D0
+   Brand: purple #7C3AED (primary) + amber #F59E0B (secondary)
+   ============================================================ */
 :root {
-  --radius: 0.75rem;
-  --background: #0a0812;
-  --foreground: #f3f0fa;
-  --card: #130f1e;
-  --card-foreground: #f3f0fa;
-  --popover: #171226;
-  --popover-foreground: #f3f0fa;
-  --primary: #8b5cf6;
-  --primary-foreground: #ffffff;
-  --secondary: #1e1733;
-  --secondary-foreground: #e9e4f7;
-  --muted: #1a1428;
-  --muted-foreground: #a89fc2;
-  --accent: #271e42;
-  --accent-foreground: #e9e4f7;
-  --destructive: #f43f5e;
-  --border: rgba(167, 139, 250, 0.16);
-  --input: rgba(167, 139, 250, 0.2);
-  --ring: #8b5cf6;
-  --font-cairo: "Cairo", ui-sans-serif, system-ui, sans-serif;
+  --radius: 0.625rem;
+  --background: #FFFFFF;
+  --foreground: #1A1A1A;
+  --card: #FFFFFF;
+  --card-foreground: #1A1A1A;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1A1A;
+  --primary: #7C3AED;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F5EFE0;
+  --secondary-foreground: #1A1A1A;
+  --muted: #F5EFE0;
+  --muted-foreground: #5A5A5A;
+  --accent: #F5EFE0;
+  --accent-foreground: #1A1A1A;
+  --destructive: #DC2626;
+  --border: #D0D0D0;
+  --input: #D0D0D0;
+  --ring: #7C3AED;
+  --font-jakarta: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
-* {
-  border-color: var(--border);
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-jakarta);
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: rgba(124, 58, 237, 0.18);
+    color: #1A1A1A;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-cairo);
-  overflow-x: hidden;
-}
-
-::selection {
-  background: rgba(139, 92, 246, 0.45);
-  color: #fff;
-}
-
-/* سكرول بار بنفسجي أنيق */
+/* Elegant purple scrollbar on the white canvas */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0812;
+  background: #F5EFE0;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #7c3aed, #d946ef);
+  background: #7C3AED66;
   border-radius: 8px;
-  border: 2px solid #0a0812;
+  border: 2px solid #F5EFE0;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #8b5cf6, #e879f9);
+  background: #7C3AED99;
 }
 
-/* زجاج لامع */
-.glass {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+/* Display font helper for headings / badges */
+.font-display {
+  font-family: "Space Grotesk", var(--font-jakarta), sans-serif;
 }
 
-.glass-strong {
-  background: rgba(23, 18, 38, 0.72);
-  border: 1px solid rgba(167, 139, 250, 0.18);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+/* ---------- Soft cards (family signature: white card + hairline border + light shadow) ---------- */
+.card-soft {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 1px 2px rgba(18, 16, 31, 0.04), 0 8px 24px -18px rgba(18, 16, 31, 0.18);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.card-soft:hover {
+  transform: translateY(-3px);
+  border-color: #7C3AED55;
+  box-shadow: 0 2px 4px rgba(18, 16, 31, 0.05), 0 18px 38px -20px rgba(124, 58, 237, 0.28);
 }
 
-/* نص متدرج متلألئ (متغطي ببعضه ويحرك لمعانه) */
-.text-shine {
-  background: linear-gradient(
-    100deg,
-    #a78bfa 0%,
-    #e879f9 25%,
-    #fbbf24 50%,
-    #e879f9 75%,
-    #a78bfa 100%
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: shine 5s linear infinite;
+/* ---------- Hero: deep midnight purple gradient ---------- */
+.hero-dark {
+  background: linear-gradient(160deg, #12101F 0%, #1E1B2E 62%, #262138 100%);
 }
 
-@keyframes shine {
-  to {
-    background-position: 200% center;
+/* ---------- Floating English letters (subtle, low opacity) ---------- */
+.float-letter {
+  position: absolute;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.07);
+  user-select: none;
+  pointer-events: none;
+  will-change: transform;
+  animation: letter-drift 14s ease-in-out infinite;
+}
+.float-letter.violet {
+  color: rgba(167, 139, 250, 0.12);
+}
+.float-letter.amber {
+  color: rgba(251, 191, 36, 0.1);
+}
+.float-letter.l2 {
+  animation-duration: 18s;
+  animation-delay: -4s;
+}
+.float-letter.l3 {
+  animation-duration: 21s;
+  animation-delay: -9s;
+}
+.float-letter.l4 {
+  animation-duration: 25s;
+  animation-delay: -13s;
+}
+
+@keyframes letter-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(-4deg);
+  }
+  33% {
+    transform: translate(18px, -22px) rotate(3deg);
+  }
+  66% {
+    transform: translate(-14px, 12px) rotate(-2deg);
   }
 }
 
-/* إطار متدرج دوّار للعناصر المميزة */
-.glow-ring {
-  position: relative;
+/* ---------- Entrance stagger (hero) ---------- */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.glow-ring::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, #8b5cf6, #d946ef, #fbbf24, #8b5cf6);
-  background-size: 300% 300%;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: ringShift 6s linear infinite;
-  pointer-events: none;
+.fade-up {
+  opacity: 0;
+  animation: fade-up 0.7s ease-out forwards;
 }
+.fu-1 { animation-delay: 0.05s; }
+.fu-2 { animation-delay: 0.15s; }
+.fu-3 { animation-delay: 0.25s; }
+.fu-4 { animation-delay: 0.38s; }
+.fu-5 { animation-delay: 0.5s; }
 
-@keyframes ringShift {
-  0% {
-    background-position: 0% 50%;
+/* Gentle float for the teacher photo frame */
+@keyframes soft-float {
+  0%,
+  100% {
+    transform: translateY(0);
   }
   50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+    transform: translateY(-10px);
   }
 }
-
-/* حروف إنجليزية ضخمة كخلفية */
-.letter-outline {
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(167, 139, 250, 0.22);
-  font-family: "Space Grotesk", sans-serif;
-  user-select: none;
+.soft-float {
+  animation: soft-float 6.5s ease-in-out infinite;
+  will-change: transform;
 }
 
-.letter-glow {
-  color: rgba(167, 139, 250, 0.14);
-  text-shadow:
-    0 0 40px rgba(139, 92, 246, 0.35),
-    0 0 90px rgba(217, 70, 239, 0.18);
-  font-family: "Space Grotesk", sans-serif;
-  user-select: none;
-}
-
-/* ماركي الكلمات الإنجليزية */
-@keyframes marquee-rtl {
+/* ---------- Skills marquee (LTR) ---------- */
+@keyframes marquee-ltr {
   from {
     transform: translateX(0);
   }
   to {
-    transform: translateX(50%);
+    transform: translateX(-50%);
   }
 }
 .animate-marquee {
-  animation: marquee-rtl 28s linear infinite;
+  animation: marquee-ltr 30s linear infinite;
 }
 .marquee-mask {
-  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
 }
 
-/* كرة توهج */
-.orb {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(90px);
-  pointer-events: none;
+/* ---------- Reveal on scroll ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Small dot separator for the marquee ---------- */
+.mq-dot {
+  color: #7C3AED;
+  opacity: 0.65;
+}
+
+/* ---------- Sticky footer safe area ---------- */
+.footer-safe {
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+}
+
+/* ---------- Respect reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .float-letter,
+  .soft-float,
+  .animate-marquee {
+    animation: none !important;
+  }
+  .fade-up {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }

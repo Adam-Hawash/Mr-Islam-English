@@ -1,21 +1,51 @@
-const WORDS = ["Grammar", "Vocabulary", "Reading", "Writing", "Listening", "Speaking", "Phonetics", "Exams"];
+const SKILLS = [
+  "Grammar",
+  "Vocabulary",
+  "Reading",
+  "Writing",
+  "Listening",
+  "Speaking",
+];
 
-export function Marquee() {
-  const row = [...WORDS, ...WORDS];
+function MarqueeContent() {
   return (
-    <section aria-label="مهارات اللغة الإنجليزية" className="border-y border-violet-400/10 bg-night-800/60 py-5">
-      <div className="marquee-mask overflow-hidden" dir="ltr">
-        <div className="animate-marquee flex w-max items-center gap-10 pl-10">
-          {row.map((w, i) => (
-            <span key={i} className="flex items-center gap-10">
-              <span className="font-display text-2xl font-bold text-transparent sm:text-3xl" style={{ backgroundImage: "linear-gradient(90deg,#a78bfa,#e879f9,#fbbf24)", WebkitBackgroundClip: "text", backgroundClip: "text" }}>
-                {w}
-              </span>
-              <span className="text-sm text-amber-400/70">✦</span>
-            </span>
-          ))}
+    <div className="flex shrink-0 items-center" aria-hidden="true">
+      {SKILLS.map((s) => (
+        <span key={s} className="flex items-center">
+          <span className="px-6 font-display text-sm font-bold uppercase tracking-[0.22em] text-foreground/75 sm:px-8 sm:text-base">
+            {s}
+          </span>
+          <span className="mq-dot text-lg leading-none" aria-hidden="true">
+            ✦
+          </span>
+        </span>
+      ))}
+    </div>
+  );
+}
+
+/**
+ * Animated skills strip — cream band that bridges the dark hero and the white canvas.
+ * The list is duplicated so the LTR marquee loops seamlessly.
+ */
+export function Marquee() {
+  return (
+    <section
+      aria-label="English skills covered on the platform"
+      className="relative border-y border-border bg-[#F5EFE0] py-4"
+    >
+      <div className="marquee-mask overflow-hidden">
+        <div className="animate-marquee flex w-max">
+          <MarqueeContent />
+          <MarqueeContent />
         </div>
       </div>
+      {/* accessible static list */}
+      <ul className="sr-only">
+        {SKILLS.map((s) => (
+          <li key={s}>{s}</li>
+        ))}
+      </ul>
     </section>
   );
 }

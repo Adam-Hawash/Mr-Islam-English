@@ -8,7 +8,7 @@ import { Footer } from "./Footer";
 
 export function Landing() {
   return (
-    <div className="min-h-screen flex flex-col bg-night-900 text-foreground">
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
       <Navbar />
       <main className="flex-1">
         <Hero />
