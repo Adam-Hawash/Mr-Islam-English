@@ -1,0 +1,17 @@
+.next
+node_modules/
+next-env.d.ts
+tsconfig.tsbuildinfo
+.env
+dev.log
+*.log
+tool-results/
+skills/
+examples/
+worklog.md
+CLAUDE.md
+AGENTS.md
+Caddyfile
+public/uploads/
+prisma/upload/
+upload/

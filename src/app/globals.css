@@ -1,0 +1,220 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-cairo);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* لوحة "البريق الليلي" — بنفسجي × كهرماني على منتصف الليل */
+  --color-night-900: #0a0812;
+  --color-night-800: #100c1c;
+  --color-night-700: #171226;
+  --color-night-600: #1e1733;
+  --color-night-500: #271e42;
+  --color-violet-100: #ede9fe;
+  --color-violet-200: #ddd6fe;
+  --color-violet-300: #c4b5fd;
+  --color-violet-400: #a78bfa;
+  --color-violet-500: #8b5cf6;
+  --color-violet-600: #7c3aed;
+  --color-fuchsia-400: #e879f9;
+  --color-fuchsia-500: #d946ef;
+  --color-amber-300: #fcd34d;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: #0a0812;
+  --foreground: #f3f0fa;
+  --card: #130f1e;
+  --card-foreground: #f3f0fa;
+  --popover: #171226;
+  --popover-foreground: #f3f0fa;
+  --primary: #8b5cf6;
+  --primary-foreground: #ffffff;
+  --secondary: #1e1733;
+  --secondary-foreground: #e9e4f7;
+  --muted: #1a1428;
+  --muted-foreground: #a89fc2;
+  --accent: #271e42;
+  --accent-foreground: #e9e4f7;
+  --destructive: #f43f5e;
+  --border: rgba(167, 139, 250, 0.16);
+  --input: rgba(167, 139, 250, 0.2);
+  --ring: #8b5cf6;
+  --font-cairo: "Cairo", ui-sans-serif, system-ui, sans-serif;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-cairo);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(139, 92, 246, 0.45);
+  color: #fff;
+}
+
+/* سكرول بار بنفسجي أنيق */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0812;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #7c3aed, #d946ef);
+  border-radius: 8px;
+  border: 2px solid #0a0812;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #8b5cf6, #e879f9);
+}
+
+/* زجاج لامع */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.glass-strong {
+  background: rgba(23, 18, 38, 0.72);
+  border: 1px solid rgba(167, 139, 250, 0.18);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* نص متدرج متلألئ (متغطي ببعضه ويحرك لمعانه) */
+.text-shine {
+  background: linear-gradient(
+    100deg,
+    #a78bfa 0%,
+    #e879f9 25%,
+    #fbbf24 50%,
+    #e879f9 75%,
+    #a78bfa 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 5s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* إطار متدرج دوّار للعناصر المميزة */
+.glow-ring {
+  position: relative;
+}
+.glow-ring::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, #8b5cf6, #d946ef, #fbbf24, #8b5cf6);
+  background-size: 300% 300%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: ringShift 6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes ringShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* حروف إنجليزية ضخمة كخلفية */
+.letter-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(167, 139, 250, 0.22);
+  font-family: "Space Grotesk", sans-serif;
+  user-select: none;
+}
+
+.letter-glow {
+  color: rgba(167, 139, 250, 0.14);
+  text-shadow:
+    0 0 40px rgba(139, 92, 246, 0.35),
+    0 0 90px rgba(217, 70, 239, 0.18);
+  font-family: "Space Grotesk", sans-serif;
+  user-select: none;
+}
+
+/* ماركي الكلمات الإنجليزية */
+@keyframes marquee-rtl {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(50%);
+  }
+}
+.animate-marquee {
+  animation: marquee-rtl 28s linear infinite;
+}
+.marquee-mask {
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* كرة توهج */
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  pointer-events: none;
+}
