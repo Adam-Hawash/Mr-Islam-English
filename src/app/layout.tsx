@@ -20,8 +20,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" dir="ltr" data-scroll-behavior="smooth">
+    <html lang="en" dir="ltr" translate="no" data-scroll-behavior="smooth">
       <head>
+      <meta name="google" content="notranslate" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font -- App Router: fonts declared in the root layout apply to every page */}
