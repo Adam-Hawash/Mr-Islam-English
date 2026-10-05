@@ -1,5 +1,6 @@
 import { Navbar } from "./Navbar";
 import { Hero } from "./Hero";
+import { IntroVideoSection, TeacherVideoSection } from "./IntroVideos";
 import { Marquee } from "./Marquee";
 import { Features } from "./Features";
 import { Grades } from "./Grades";
@@ -12,9 +13,13 @@ export function Landing() {
       <Navbar />
       <main className="flex-1">
         <Hero />
+        {/* «الفيديو التعريفي» — مخفي تمامًا لحد ما اللينك يتحدد في IntroVideos.tsx */}
+        <IntroVideoSection />
         <Marquee />
         <Features />
         <Grades />
+        {/* «فيديو عن المستر» — قبل قسم About */}
+        <TeacherVideoSection />
         <About />
       </main>
       <Footer />
