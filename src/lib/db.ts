@@ -49,3 +49,30 @@ export const db =
 if (process.env.NODE_ENV !== "production") {
   globalForPrisma.prisma = db;
 }
+
+/* (ز43) withRetry + safeWrite — نفس منطق المنصة المرجعية: كتابة/قراءة
+   SQLite بتتقابل أحيانًا مع «database is locked» (SQLITE_BUSY) أو انقطاع
+   لحظي — بدل ما العملية تقع، بنعيد المحاولة بتأخير متزايد. backfill-figures
+   و cleanup-extraction و sequential-guard بيلفوا كتاباتهم بيها. */
+export async function withRetry(fn: () => Promise<any>, retries: number = 3, delayMs: number = 200): Promise<any> {
+  for (var attempt = 0; attempt <= retries; attempt++) {
+    try {
+      return await fn();
+    } catch (error: any) {
+      var msg = (error && (error.message || "")) || "";
+      var code = (error && (error.code || "")) || "";
+      var isLocked = msg.indexOf("database is locked") !== -1 || code === "SQLITE_BUSY";
+      var isTransient = code === "CONNRESET" || code === "ECONNRESET" || code === "ETIMEDOUT";
+      if ((isLocked || isTransient) && attempt < retries) {
+        await new Promise(function (r) { setTimeout(r, delayMs * (attempt + 1)); });
+        continue;
+      }
+      throw error;
+    }
+  }
+  throw new Error("withRetry: unexpected fallthrough");
+}
+
+export async function safeWrite(fn: () => Promise<any>) {
+  return withRetry(fn, 3, 300);
+}
