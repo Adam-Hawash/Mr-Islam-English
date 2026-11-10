@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "eslint": "^9",
-    "eslint-config-next": "^16.3.8"
+    "eslint-config-next": "^16.3.8",
+    "tailwindcss-animate": "^1.0.7"
   }
 }
